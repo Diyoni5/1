@@ -19,8 +19,8 @@ while True:
     logger.warning(f"{addr} connected from port {port}")
 
     incoming = client.recv(500)
-    # print(incoming)
     content = ''
     client.send(content)
     
     client.close()
+    print('hiiiii')
