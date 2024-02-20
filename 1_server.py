@@ -1,18 +1,14 @@
 import socket
 import logging
-import json
-import random
-
-from common import AAA
 
 logger = logging.getLogger(__name__)
 logging.basicConfig()
 
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-c = s.bind(AAA)
+c = s.bind(('127.0.0.1', 8080))
 s.listen(5)
 s.setblocking(False)
-s.settimeout(1)
+s.settimeout(5)
 
 while True:
     try:
@@ -22,7 +18,9 @@ while True:
     client, (addr, port) = client_socket
     logger.warning(f"{addr} connected from port {port}")
 
-    client.send(str(random.random()).encode())
-    # b''.decode()
-    # "".encode()
+    incoming = client.recv(500)
+    content = ''
+    client.send(content)
+    
     client.close()
+    print('hiiiii')
