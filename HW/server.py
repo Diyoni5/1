@@ -1,4 +1,5 @@
 import asyncio
+import pickle
 
 from common import AAA
 from penguin import *
@@ -11,7 +12,7 @@ class EchoServerProtocol:
         message = pickle.loads(data)
         print('Received %r from %s' % (message, addr))
         print('Send %r to %s' % (message.swim(), addr))
-        self.transport.write(pickle.loads(data).inf().encode())
+        self.transport.sendto(pickle.loads(data).swim().encode(), addr)
 
         print("I'm closing?")
         self.transport.close()
